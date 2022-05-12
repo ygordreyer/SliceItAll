@@ -11,7 +11,7 @@ public class DestroyableObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(GameManager.KnifeTag))
+        if(other.CompareTag(GameManager.Instance.Settings.KnifeTag))
             DestroyObject();
     }
 

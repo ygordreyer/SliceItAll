@@ -13,42 +13,10 @@
         protected BaseStateMachine StateMachine { get; }
         public bool IsInitialized { get; }
 
-        protected void Enable()
-        {
-            /*
-            if (Handler.Collider)
-                EnableCollision();
-            if (Handler.Rigidbody)
-                Handler.Rigidbody.Sleep();
-            */
-        }
-
-        protected virtual void Disable()
-        {
-            /*
-            DisableCollision();
-            Handler.Rigidbody.Sleep();
-            MakeRenderNormal();
-            foreach (var renderer in Handler.Images)
-            {
-                var myColor = renderer.color;
-                myColor.a = GlobalKnifeData.DisabledAlpha;
-                renderer.color = myColor;
-            }
-            */
-        }
-
-        protected void DisableCollision()
-        {
-            //Handler.Collider.enabled = false;
-        }
-
-        protected void EnableCollision()
-        {
-            //Handler.Collider.enabled = true;
-        }
-
-
+        protected void Enable() { }
+        protected virtual void Disable() { }
+        protected void DisableCollision() { }
+        protected void EnableCollision() { }
         public virtual void OnInitialize() { }
         public virtual void OnEnterState() { }
         public virtual void OnExitState() { }

@@ -1,11 +1,9 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace;
+using UnityEngine;
 
 public interface IKnifeComponents
 {
-    Camera MainCamera { get; }
-    Collider Collider { get; }
     Rigidbody Rigidbody { get; }
-    MonoBehaviour MonoBehavior { get; }
-    GameObject gameObject { get; }
     Transform transform { get; }
+    KnifeInputController InputController { get; set; }
 }

@@ -13,24 +13,21 @@ public class KnifeJump : KnifeBaseState
 
     public override void OnEnterState()
     {
+        Handler.Rigidbody.isKinematic = false;
+        UnlockXRotation();
         Jump();
         Rotate();
     }
 
-    void Jump()
+    private void Jump()
     {
-        Handler.Rigidbody.isKinematic = false;
-        Handler.Rigidbody.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-
         Handler.Rigidbody.velocity = Vector3.zero;
         Handler.Rigidbody.angularVelocity = Vector3.zero; 
-        Vector3 velocity = new Vector3(-1,2,0);
-        Handler.Rigidbody.AddForce(velocity);
+        Handler.Rigidbody.AddForce(GameManager.Instance.Settings.jumpForce);
     }
 
-    void Rotate()
-    {
-        Handler.Rigidbody.AddTorque(Handler.transform.right * 10f, ForceMode.VelocityChange);
-    }
+    private void UnlockXRotation() => Handler.Rigidbody.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+    private void Rotate() => Handler.Rigidbody.AddTorque(Handler.transform.right * 10f, ForceMode.VelocityChange);
 
 }

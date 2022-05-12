@@ -1,20 +1,16 @@
 using System;
 using System.Collections.Generic;
 
-/*
- * Utilitário que criei para facilitar a aplicação de máquina de estados
- */
-
 public abstract class BaseStateMachine
 {
 
     protected BaseStateMachine(IStateMachineHandler handler = null) => Handler = handler;
 
-    private readonly Stack<IState> stack = new Stack<IState>();
+    private readonly Stack<IState> stack = new ();
 
-    private readonly Dictionary<Type, IState> register = new Dictionary<Type, IState>();
+    private readonly Dictionary<Type, IState> register = new ();
 
-    public IStateMachineHandler Handler { get; set; }
+    public IStateMachineHandler Handler { get; }
     
     public bool IsInitialized { get; protected set; }
 
@@ -25,7 +21,7 @@ public abstract class BaseStateMachine
         if (state == null)
             throw new ArgumentNullException("Null is not a valid state");
 
-        var type = state?.GetType();
+        var type = state.GetType();
         register.Add(type, state);
     }
 
@@ -90,5 +86,6 @@ public abstract class BaseStateMachine
         stack.Clear();
         register.Clear();
     }
+
 
 }

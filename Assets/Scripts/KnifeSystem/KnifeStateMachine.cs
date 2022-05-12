@@ -21,21 +21,9 @@ namespace DefaultNamespace
         private KnifeFalling FallingState { get; }
         private KnifeIdle IdleState { get; }
         
-        
-        public void Jump()
-        {
-            PushState<KnifeJump>();
-        }
-        
-        public void Idle()
-        {
-            PushState<KnifeIdle>();
-        }
-        
-        public void Fall()
-        {
-            PushState<KnifeFalling>();
-        }
+        public void Jump() => PushState<KnifeJump>();
+        public void Idle() => PushState<KnifeIdle>();
+        public void Fall() => PushState<KnifeFalling>();
         
         
     }

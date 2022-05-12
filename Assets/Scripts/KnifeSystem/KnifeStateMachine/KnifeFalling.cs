@@ -4,26 +4,28 @@
 
     public class KnifeFalling : KnifeBaseState
     {
-        public KnifeFalling(IKnife handler, BaseStateMachine stateMachine) : base(handler, stateMachine)
-        {
-        }
+        public KnifeFalling(IKnife handler, BaseStateMachine stateMachine) : base(handler, stateMachine) { }
 
         private bool AllowJump = false;
         
         public override void OnUpdate()
         {
-            if (!StateMachine.IsCurrent<KnifeIdle>() &&
-                Math.Abs(Handler.transform.rotation.eulerAngles.x - 25.0f) < 5.0f)
-            {
-                Handler.Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-                AllowJump = true;
-            }
+            if (HasFinishedRotation())
+                ResetGroundPosition();
             else
                 AllowJump = false;
             
-            if(AllowJump && (Input.GetKeyDown("space") || Input.GetTouch(0).phase == TouchPhase.Began))
+            if(Handler.InputController.IsClicking())
                 Handler.Jump();
                 
+        }
+
+        private bool HasFinishedRotation() => Math.Abs(Handler.transform.rotation.eulerAngles.x - 25.0f) < 5.0f;
+
+        private void ResetGroundPosition()
+        {
+            Handler.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            AllowJump = true;
         }
 
     }
